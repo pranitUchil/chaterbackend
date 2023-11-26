@@ -20,6 +20,13 @@ app.use(require('./router/login'));
 app.use(require('./router/friendrequest'));
 app.use(require('./router/chats'));
 app.use(require('./router/messages'));
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 app.get('/',(req,res)=>{
     res.send("Hello world");
 });
