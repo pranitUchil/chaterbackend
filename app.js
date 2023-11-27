@@ -13,7 +13,7 @@ dotenv.config({path:'./config.env'})
 require('./db/connect')
 
 app.use(cors({
-    origin:"http://localhost:3001"
+    origin:"https://chaterapp.netlify.app"
 }))
 app.use(cookieParser());
 app.use(express.json())
