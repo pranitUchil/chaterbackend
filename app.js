@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require('dotenv');
 const path = require('path')
 const BASE_URL = process.env.BASE_URL;
+const cors = require('cors')
 
 var multer = require('multer');
 // ...
@@ -11,6 +12,9 @@ const PORT = process.env.PORT || 5000
 dotenv.config({path:'./config.env'})
 require('./db/connect')
 
+app.use(cors({
+    origin:"http://localhost:3001"
+}))
 app.use(cookieParser());
 app.use(express.json())
 // app.use(upload.array()); 
@@ -20,13 +24,6 @@ app.use(require('./router/login'));
 app.use(require('./router/friendrequest'));
 app.use(require('./router/chats'));
 app.use(require('./router/messages'));
-app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
 app.get('/',(req,res)=>{
     res.send("Hello world");
 });
