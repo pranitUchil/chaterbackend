@@ -24,21 +24,21 @@ app.use(require('./router/login'));
 app.use(require('./router/friendrequest'));
 app.use(require('./router/chats'));
 app.use(require('./router/messages'));
-app.get('/',(req,res)=>{
-    res.send("Hello world");
-});
+
 
 // -------- Deployment ------
-// const __dirname1 = path.resolve();
-// if(process.env.NODE_ENV == 'production'){
-//     app.use(express.static(path.join(__dirname1,"frontend","build")))
-//     app.get('*',(req,res) =>{
-//         res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"))
-//     });
-// }
-// else{
-   
-// }
+const __dirname1 = path.resolve();
+if(process.env.NODE_ENV == 'production'){
+    app.use(express.static(path.join(__dirname1,"frontend","build")))
+    app.get('*',(req,res) =>{
+        res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"))
+    });
+}
+else{
+    app.get('/',(req,res)=>{
+        res.send("Hello world");
+    });
+}
 // -------- Deployment ------
 
 const server = app.listen(PORT,()=>{
